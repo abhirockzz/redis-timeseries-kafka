@@ -1,0 +1,36 @@
+redis:
+  host: <azure redis host>
+  port: 10000
+  password: <azure redis access key>
+topic:
+  name: mqtt.device-stats
+  partitions-num: 6
+  replication-factor: 3
+server:
+  port: 9080
+spring:
+  kafka:
+    bootstrap-servers:
+      - <confluent cloud bootstrap server>
+    properties:
+      ssl.endpoint.identification.algorithm: https
+      sasl.mechanism: PLAIN
+      request.timeout.ms: 20000
+      retry.backoff.ms: 500
+      sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule required username="<confluent cloud API key>" password="<confluent cloud secret>";
+      security.protocol: SASL_SSL
+
+    consumer:
+      group-id: device-data-processor
+      auto-offset-reset: latest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      #value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      max-poll-interval-ms: 10000
+      properties:
+        spring.json.use.type.headers: false
+    template:
+      default-topic:
+logging:
+  level:
+    root: info

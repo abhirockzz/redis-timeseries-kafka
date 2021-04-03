@@ -1,0 +1,21 @@
+{
+    "name": "mqtt-source",
+    "config": {
+        "connector.class": "io.confluent.connect.mqtt.MqttSourceConnector",
+        "tasks.max": "1",
+        "mqtt.server.uri": "tcp://127.0.0.1:1883",
+        "mqtt.topics": "device-stats",
+        "kafka.topic": "mqtt.device-stats",
+        "value.converter": "org.apache.kafka.connect.converters.ByteArrayConverter",
+        "value.converter.schemas.enable": false,
+        "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+        "key.converter.schemas.enable": false,
+        "transforms": "convertToMap,convertKey,extract",
+        "transforms.convertToMap.type": "org.apache.kafka.connect.transforms.HoistField$Value",
+        "transforms.convertToMap.field": "data",
+        "transforms.convertKey.type": "org.apache.kafka.connect.transforms.ValueToKey",
+        "transforms.convertKey.fields": "data",
+        "transforms.extract.type": "org.apache.kafka.connect.transforms.ExtractField$Value",
+        "transforms.extract.field": "data"
+    }
+}
