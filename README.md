@@ -2,7 +2,11 @@
 
 A practical example of how to use [RedisTimeSeries](https://redisearch.io/) with Apache Kafka for analyzing time series data.
 
-**blog post coming soon**
+The blog post is coming soon. Meanwhile, here is a talk from RedisConf 2021 which covers this topic as well
+
+[![RedisConf 2021](https://img.youtube.com/vi/8et5wd60YuY/0.jpg)](https://youtu.be/8et5wd60YuY)
+
+### High level architecture
 
 ![](images/architecture_2.png)
 
